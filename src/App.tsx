@@ -6,7 +6,6 @@ import { AppLayout } from "@/layouts/AppLayout";
 import { GuestGuard } from "@/components/guards/GuestGuard";
 import { AuthGuard } from "@/components/guards/AuthGuard";
 import { LoginPage } from "@/pages/login";
-import { SchedulePage } from "@/pages/schedule";
 
 function App() {
   return (
@@ -23,9 +22,7 @@ function App() {
 
             {/* Protected routes */}
             <Route element={<AuthGuard />}>
-              <Route element={<AppLayout />}>
-                <Route path="/" element={<SchedulePage />} />
-              </Route>
+              <Route path="/" element={<AppLayout />} />
             </Route>
           </Route>
 
