@@ -56,8 +56,6 @@ function LoginForm() {
             type="email"
             placeholder="أدخل بريدك الإلكتروني"
             autoComplete="email"
-            dir="ltr"
-            className="text-right"
             {...register("email")}
           />
           {errors.email && (
@@ -72,8 +70,6 @@ function LoginForm() {
             type="password"
             placeholder="••••••••"
             autoComplete="current-password"
-            dir="ltr"
-            className="text-right"
             {...register("password")}
           />
           {errors.password && (

@@ -2,10 +2,11 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AppProviders } from "@/providers/AppProviders";
 import { RootLayout } from "@/layouts/RootLayout";
 import { AuthLayout } from "@/layouts/AuthLayout";
+import { AppLayout } from "@/layouts/AppLayout";
 import { GuestGuard } from "@/components/guards/GuestGuard";
 import { AuthGuard } from "@/components/guards/AuthGuard";
 import { LoginPage } from "@/pages/login";
-import { DashboardPage } from "@/pages/dashboard";
+import { SchedulePage } from "@/pages/schedule";
 
 function App() {
   return (
@@ -22,7 +23,9 @@ function App() {
 
             {/* Protected routes */}
             <Route element={<AuthGuard />}>
-              <Route path="/" element={<DashboardPage />} />
+              <Route element={<AppLayout />}>
+                <Route path="/" element={<SchedulePage />} />
+              </Route>
             </Route>
           </Route>
 

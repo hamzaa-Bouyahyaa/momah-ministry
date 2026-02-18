@@ -135,3 +135,11 @@
     radial-gradient(ellipse 80% 50% at 50% 0%, oklch(0.32 0.06 175 / 0.12) 0%, transparent 100%),
     var(--muted);
 }
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
