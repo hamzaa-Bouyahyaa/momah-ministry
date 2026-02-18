@@ -25,7 +25,7 @@ function RequestsPage() {
             طلبات الاجتماع معالي الوزير
           </h1>
 
-          <div>
+          <div className="overflow-x-auto scrollbar-hide">
             <Tabs
               dir="rtl"
               value={activeTab}
@@ -34,14 +34,13 @@ function RequestsPage() {
               <TabsList variant="line" className="justify-end">
                 <TabsTrigger
                   value="pending"
-                  className="data-[state=active]:text-primary after:data-[state=active]:bg-primary"
+                  className="shrink-0 data-[state=active]:text-primary after:data-[state=active]:bg-primary"
                 >
-                  الاجتماعات المطلوبة قيد الانتظار (
-                  {MOCK_PENDING_REQUESTS.length})
+                  الاجتماعات المطلوبة قيد الانتظار ({MOCK_PENDING_REQUESTS.length})
                 </TabsTrigger>
                 <TabsTrigger
                   value="scheduled"
-                  className="data-[state=active]:text-primary after:data-[state=active]:bg-primary"
+                  className="shrink-0 data-[state=active]:text-primary after:data-[state=active]:bg-primary"
                 >
                   الاجتماعات المُجدولة ({MOCK_SCHEDULED_REQUESTS.length})
                 </TabsTrigger>

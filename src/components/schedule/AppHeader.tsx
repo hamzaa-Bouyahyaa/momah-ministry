@@ -8,36 +8,39 @@ import ministerImg from "@/assets/images/minister.jpg";
 function AppHeader() {
   return (
     <header className="py-4">
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6">
-        {/* Right: Logo + App Name */}
-        <div className="flex items-center gap-3">
-          <img src={calendarIcon} alt="" className="size-8" />
-          <div className="leading-tight">
-            <p className="text-base font-bold text-foreground">
-              المنصة الموحّدة
-            </p>
-            <p className="text-xs text-muted-foreground">للمكتب التنفيذي</p>
+      <div className="mx-auto max-w-[1400px] space-y-3 px-4 md:px-6">
+        {/* Top row: Logo + Actions */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 md:gap-3">
+            <img src={calendarIcon} alt="" className="size-7 md:size-8" />
+            <div className="leading-tight">
+              <p className="text-sm font-bold text-foreground md:text-base">
+                المنصة الموحّدة
+              </p>
+              <p className="text-xs text-muted-foreground">للمكتب التنفيذي</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 md:gap-3">
+            <Avatar size="lg" className="size-9 md:size-11">
+              <AvatarImage
+                src={ministerImg}
+                alt="صورة المستخدم"
+              />
+              <AvatarFallback>م</AvatarFallback>
+            </Avatar>
+            <button className="flex size-9 items-center justify-center rounded-full border border-border bg-muted transition-colors md:size-10">
+              <img src={searchIcon} alt="بحث" className="size-4 md:size-5" />
+            </button>
+            <button className="flex size-9 items-center justify-center rounded-full border border-border bg-muted transition-colors md:size-10">
+              <img src={aiIcon} alt="إعدادات" className="size-4 md:size-5" />
+            </button>
           </div>
         </div>
 
-        {/* Center: Navigation Tabs */}
-        <HeaderNavTabs />
-
-        {/* Left: Actions */}
-        <div className="flex items-center gap-3">
-          <Avatar size="lg" className="size-11">
-            <AvatarImage
-              src={ministerImg}
-              alt="صورة المستخدم"
-            />
-            <AvatarFallback>م</AvatarFallback>
-          </Avatar>
-          <button className="flex size-10 items-center justify-center rounded-full border border-border transition-colors bg-muted">
-            <img src={searchIcon} alt="بحث" className="size-5" />
-          </button>
-          <button className="flex size-10 items-center justify-center rounded-full border border-border transition-colors bg-muted">
-            <img src={aiIcon} alt="إعدادات" className="size-5" />
-          </button>
+        {/* Navigation Tabs - own row on mobile, centered */}
+        <div className="flex justify-center">
+          <HeaderNavTabs />
         </div>
       </div>
     </header>

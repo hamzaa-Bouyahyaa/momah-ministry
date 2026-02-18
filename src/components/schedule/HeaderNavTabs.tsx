@@ -15,7 +15,7 @@ function HeaderNavTabs() {
   const setActiveTab = useAppStore((s) => s.setActiveHeaderTab);
 
   return (
-    <nav className="flex items-center gap-1 rounded-full bg-white p-1.5 shadow-sm">
+    <nav className="flex items-center gap-1 rounded-full bg-white p-1 shadow-sm md:p-1.5">
       {NAV_ITEMS.map((item) => {
         const isActive = activeTab === item.id;
         return (
@@ -23,7 +23,7 @@ function HeaderNavTabs() {
             key={item.id}
             onClick={() => setActiveTab(item.id)}
             className={cn(
-              "flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors",
+              "flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-medium transition-colors md:gap-2 md:px-5 md:py-2.5 md:text-sm",
               isActive
                 ? "bg-primary text-primary-foreground"
                 : "text-foreground hover:bg-muted",
@@ -32,9 +32,9 @@ function HeaderNavTabs() {
             <img
               src={item.icon}
               alt=""
-              className={cn("size-5", isActive && "brightness-0 invert")}
+              className={cn("size-4 md:size-5", isActive && "brightness-0 invert")}
             />
-            <span>{item.label}</span>
+            <span className="hidden sm:inline">{item.label}</span>
           </button>
         );
       })}
