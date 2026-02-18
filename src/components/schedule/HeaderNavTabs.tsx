@@ -7,7 +7,7 @@ import smartAiIcon from "@/assets/icons/smart-ai.svg";
 const NAV_ITEMS = [
   { id: "calendar", label: "تقويم الاجتماعات", icon: calendarVerifiedIcon },
   { id: "assistant", label: "المساعد الذكي", icon: smartAiIcon },
-  { id: "request", label: "اطلب اجتماع", icon: calendarCheckIcon },
+  { id: "request", label: "طلب اجتماع", icon: calendarCheckIcon },
 ] as const;
 
 function HeaderNavTabs() {
