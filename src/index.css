@@ -64,7 +64,7 @@
     --primary-foreground: oklch(0.985 0 0);
     --secondary: oklch(0.97 0 0);
     --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
+    --muted: oklch(0.96 0.007 260);
     --muted-foreground: oklch(0.556 0 0);
     --accent: oklch(0.97 0 0);
     --accent-foreground: oklch(0.205 0 0);
@@ -128,4 +128,10 @@
   body {
     @apply bg-background text-foreground;
     }
+}
+
+.bg-app {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, oklch(0.32 0.06 175 / 0.12) 0%, transparent 100%),
+    var(--muted);
 }
