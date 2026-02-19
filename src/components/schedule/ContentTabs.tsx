@@ -15,28 +15,26 @@ function ContentTabs({
   meetingCount,
 }: ContentTabsProps) {
   return (
-    <div className="mb-6">
-      <Tabs
-        dir="rtl"
-        value={activeTab}
-        onValueChange={(val) => onTabChange(val as ContentTab)}
-      >
-        <TabsList variant="line" className="justify-end">
-          <TabsTrigger
-            value="notifications"
-            className="data-[state=active]:text-primary after:data-[state=active]:bg-primary"
-          >
-            التبليغات ({notificationCount})
-          </TabsTrigger>
-          <TabsTrigger
-            value="meetings"
-            className="data-[state=active]:text-primary after:data-[state=active]:bg-primary"
-          >
-            الاجتماعات ({meetingCount})
-          </TabsTrigger>
-        </TabsList>
-      </Tabs>
-    </div>
+    <Tabs
+      dir="rtl"
+      value={activeTab}
+      onValueChange={(val) => onTabChange(val as ContentTab)}
+    >
+      <TabsList variant="line" className="justify-end">
+        <TabsTrigger
+          value="notifications"
+          className="data-[state=active]:text-primary after:data-[state=active]:bg-primary"
+        >
+          التبليغات ({notificationCount})
+        </TabsTrigger>
+        <TabsTrigger
+          value="meetings"
+          className="data-[state=active]:text-primary after:data-[state=active]:bg-primary"
+        >
+          الاجتماعات ({meetingCount})
+        </TabsTrigger>
+      </TabsList>
+    </Tabs>
   );
 }
 

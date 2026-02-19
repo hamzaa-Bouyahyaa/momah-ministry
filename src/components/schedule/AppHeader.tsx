@@ -20,7 +20,7 @@ function AppHeader() {
             </div>
           </div>
 
-          <div className="order-last w-full flex justify-center md:order-none md:w-auto">
+          <div className="order-last w-full flex justify-center md:order-0 md:w-auto">
             <HeaderNavTabs />
           </div>
 
