@@ -16,6 +16,8 @@ export interface Attendee {
   id: string;
   name: string;
   avatar: string;
+  role?: string;
+  group?: string;
 }
 
 export interface AgendaItem {

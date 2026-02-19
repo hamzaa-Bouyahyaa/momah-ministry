@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Clock,
   MapPin,
@@ -5,6 +6,8 @@ import {
   Sparkles,
   CalendarCheck,
   ShieldCheck,
+  ChevronLeft,
+  ChevronUp,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -19,6 +22,7 @@ import type {
   MeetingCategory,
   MeetingTag,
   AgendaItem,
+  Attendee,
 } from "@/types/meeting-detail";
 import { MeetingCardActions } from "./MeetingCardActions";
 
@@ -82,11 +86,44 @@ function AccordionBulletContent({ items }: { items: AgendaItem[] }) {
   );
 }
 
+const STACKED_LIMIT = 4;
+
+function AttendeeInline({ attendee }: { attendee: Attendee }) {
+  return (
+    <div className="flex items-center gap-1.5">
+      <Avatar size="sm">
+        <AvatarImage src={attendee.avatar} alt={attendee.name} />
+        <AvatarFallback>{attendee.name[0]}</AvatarFallback>
+      </Avatar>
+      <span className="text-xs text-muted-foreground">
+        {attendee.name}
+        {attendee.role && (
+          <span className="text-primary font-medium"> ({attendee.role})</span>
+        )}
+      </span>
+    </div>
+  );
+}
+
 function DetailedMeetingCard({ meeting }: DetailedMeetingCardProps) {
+  const [showAttendees, setShowAttendees] = useState(false);
+
   const categoryConfig = CATEGORY_CONFIG[meeting.category];
   const borderClass = getBorderClass(meeting.tags);
 
   const hasAccordions = meeting.agenda || meeting.support;
+  const isStacked = meeting.attendees.length >= STACKED_LIMIT;
+
+  // Group attendees by their group field
+  const groupedAttendees = meeting.attendees.reduce<Record<string, Attendee[]>>(
+    (acc, attendee) => {
+      const group = attendee.group || "الحضور";
+      if (!acc[group]) acc[group] = [];
+      acc[group].push(attendee);
+      return acc;
+    },
+    {},
+  );
 
   return (
     <div className={cn("rounded-xl bg-card p-5", borderClass)}>
@@ -187,28 +224,91 @@ function DetailedMeetingCard({ meeting }: DetailedMeetingCardProps) {
       {/* Bottom row: attendees + actions */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
-            {meeting.attendees.map((attendee, i) => (
-              <div key={attendee.id} className="flex items-center gap-1.5">
-                {i > 0 && <div className="mx-1 h-8 w-px bg-border" />}
-                <Avatar size="sm">
-                  <AvatarImage src={attendee.avatar} alt={attendee.name} />
-                  <AvatarFallback>{attendee.name[0]}</AvatarFallback>
-                </Avatar>
-                <span className="text-xs text-muted-foreground">
-                  {attendee.name}
-                </span>
+          {isStacked && !showAttendees ? (
+            <>
+              {/* Overlapping avatar stack */}
+              <div className="flex items-center -space-x-2">
+                {meeting.attendees.slice(0, 4).map((attendee) => (
+                  <Avatar
+                    key={attendee.id}
+                    size="sm"
+                    className="ring-2 ring-card"
+                  >
+                    <AvatarImage src={attendee.avatar} alt={attendee.name} />
+                    <AvatarFallback>{attendee.name[0]}</AvatarFallback>
+                  </Avatar>
+                ))}
               </div>
-            ))}
-          </div>
-          {meeting.attendees.length > 2 && (
-            <button className="text-xs text-muted-foreground hover:text-foreground">
-              عرض قائمة الحضور ›
-            </button>
-          )}
+              <button
+                onClick={() => setShowAttendees(true)}
+                className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+              >
+                عرض قائمة الحضور
+                <ChevronLeft className="size-3" />
+              </button>
+            </>
+          ) : !isStacked ? (
+            <div className="flex items-center gap-2">
+              {meeting.attendees.map((attendee, i) => (
+                <div key={attendee.id} className="flex items-center gap-1.5">
+                  {i > 0 && <div className="mx-1 h-8 w-px bg-border" />}
+                  <AttendeeInline attendee={attendee} />
+                </div>
+              ))}
+            </div>
+          ) : null}
         </div>
         <MeetingCardActions />
       </div>
+
+      {/* Expanded attendee list */}
+      {isStacked && showAttendees && (
+        <div className="mt-4 space-y-3 border-t border-border pt-4">
+          {Object.entries(groupedAttendees).map(([group, attendees]) => (
+            <div key={group}>
+              <p className="mb-2 text-xs font-medium text-foreground">
+                {group}:
+              </p>
+              <div className="flex flex-wrap items-center gap-2">
+                {attendees.map((attendee) => (
+                  <div
+                    key={attendee.id}
+                    className={cn(
+                      "flex items-center gap-1.5 rounded-full border border-border px-2 py-1",
+                      attendee.role === "مستشار" &&
+                        "border-primary/30 bg-primary/5",
+                    )}
+                  >
+                    <Avatar size="sm">
+                      <AvatarImage
+                        src={attendee.avatar}
+                        alt={attendee.name}
+                      />
+                      <AvatarFallback>{attendee.name[0]}</AvatarFallback>
+                    </Avatar>
+                    <span
+                      className={cn(
+                        "text-xs text-muted-foreground",
+                        attendee.role === "مستشار" && "text-primary font-medium",
+                      )}
+                    >
+                      {attendee.name}
+                      {attendee.role && ` (${attendee.role})`}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+          <button
+            onClick={() => setShowAttendees(false)}
+            className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+          >
+            إخفاء قائمة الحضور
+            <ChevronUp className="size-3" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
