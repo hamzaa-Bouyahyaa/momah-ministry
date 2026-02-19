@@ -8,9 +8,8 @@ import ministerImg from "@/assets/images/minister.jpg";
 function AppHeader() {
   return (
     <header className="py-4">
-      <div className="mx-auto max-w-[1400px] space-y-3 px-4 md:px-6">
-        {/* Top row: Logo + Actions */}
-        <div className="flex items-center justify-between">
+      <div className="mx-auto max-w-[1400px] px-4 md:px-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2 md:gap-3">
             <img src={calendarIcon} alt="" className="size-7 md:size-8" />
             <div className="leading-tight">
@@ -21,12 +20,13 @@ function AppHeader() {
             </div>
           </div>
 
+          <div className="order-last w-full flex justify-center md:order-none md:w-auto">
+            <HeaderNavTabs />
+          </div>
+
           <div className="flex items-center gap-2 md:gap-3">
             <Avatar size="lg" className="size-9 md:size-11">
-              <AvatarImage
-                src={ministerImg}
-                alt="صورة المستخدم"
-              />
+              <AvatarImage src={ministerImg} alt="صورة المستخدم" />
               <AvatarFallback>م</AvatarFallback>
             </Avatar>
             <button className="flex size-9 items-center justify-center rounded-full border border-border bg-muted transition-colors md:size-10">
@@ -36,11 +36,6 @@ function AppHeader() {
               <img src={aiIcon} alt="إعدادات" className="size-4 md:size-5" />
             </button>
           </div>
-        </div>
-
-        {/* Navigation Tabs - own row on mobile, centered */}
-        <div className="flex justify-center">
-          <HeaderNavTabs />
         </div>
       </div>
     </header>
