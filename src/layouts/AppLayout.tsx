@@ -2,6 +2,7 @@ import { AppHeader } from "@/components/schedule/AppHeader";
 import { useAppStore } from "@/stores/app-store";
 import { SchedulePage } from "@/pages/schedule";
 import { RequestsPage } from "@/pages/requests";
+import { DelegationModal } from "@/components/delegation/DelegationModal";
 
 function AppLayout() {
   const activeHeaderTab = useAppStore((s) => s.activeHeaderTab);
@@ -20,6 +21,7 @@ function AppLayout() {
           </div>
         )}
       </main>
+      <DelegationModal />
     </div>
   );
 }

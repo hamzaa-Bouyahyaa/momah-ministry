@@ -1,13 +1,21 @@
 import { ChevronsLeft, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useModalStore } from "@/stores/modal-store";
 import startPlusIcon from "@/assets/icons/start-plus.svg";
 
-function MeetingCardActions() {
+interface MeetingCardActionsProps {
+  meetingId: string;
+}
+
+function MeetingCardActions({ meetingId }: MeetingCardActionsProps) {
+  const openModal = useModalStore((s) => s.openModal);
+
   return (
     <div className="flex items-center gap-2">
       <Button
         size="sm"
         className="gap-1.5 rounded-lg bg-teal-dark hover:bg-teal-dark/90"
+        onClick={() => openModal("delegation", { meetingId })}
       >
         <ChevronsLeft className="size-3.5" />
         منح التفويض

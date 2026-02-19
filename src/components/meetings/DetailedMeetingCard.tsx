@@ -258,7 +258,7 @@ function DetailedMeetingCard({ meeting }: DetailedMeetingCardProps) {
             </div>
           ) : null}
         </div>
-        <MeetingCardActions />
+        <MeetingCardActions meetingId={meeting.id} />
       </div>
 
       {/* Expanded attendee list */}
