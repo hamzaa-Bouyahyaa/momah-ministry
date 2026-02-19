@@ -26,10 +26,10 @@ function MeetingsPanel({ activeFilters }: MeetingsPanelProps) {
 
   return (
     <div>
-      {/* Two-column layout */}
-      <div className="flex gap-6">
-        {/* Left: sticky charts */}
-        <div className="hidden w-[320px] shrink-0 space-y-4 lg:block self-start sticky top-0">
+      {/* Stacked on small screens, side-by-side on lg */}
+      <div className="flex flex-col gap-6 lg:flex-row">
+        {/* Charts: row on small screens, sticky sidebar on lg */}
+        <div className="flex flex-col gap-4 lg:w-[320px] lg:shrink-0 lg:self-start lg:sticky lg:top-0">
           <DonutChart data={DONUT_CHART_DATA} total={totalMeetings} />
           <SectorBarChart data={BAR_CHART_DATA} />
         </div>
