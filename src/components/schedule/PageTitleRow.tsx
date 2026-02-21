@@ -35,7 +35,6 @@ function PageTitleRow({
         <SelectContent>
           <SelectItem value="daily">اليومي</SelectItem>
           <SelectItem value="weekly">الأسبوعي</SelectItem>
-          <SelectItem value="monthly">الشهري</SelectItem>
         </SelectContent>
       </Select>
 

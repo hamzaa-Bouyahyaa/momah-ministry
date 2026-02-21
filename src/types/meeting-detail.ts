@@ -44,3 +44,8 @@ export interface ChartSegment {
   value: number;
   color: string;
 }
+
+export interface DailyBarEntry {
+  dayName: string;
+  segments: { value: number; color: string }[];
+}
