@@ -25,7 +25,7 @@ function WeekTabStrip({ activeWeek, totalWeeks, onWeekChange }: WeekTabStripProp
           className={cn(
             "flex-1 rounded-lg py-2.5 text-sm font-medium transition-colors",
             activeWeek === i
-              ? "bg-primary text-primary-foreground"
+              ? "bg-[#00A79D] text-primary-foreground"
               : "border border-border bg-card text-foreground hover:bg-muted",
           )}
         >

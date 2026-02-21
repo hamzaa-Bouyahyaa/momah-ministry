@@ -53,7 +53,7 @@ function RequestsPage() {
               <Calendar className="size-4" />
             </button>
 
-            <Button className="gap-2 rounded-full">
+            <Button className="gap-2 rounded-full bg-gradient-to-l from-[#048F86] to-[#6DCDCD] py-3 text-sm font-medium text-white transition-opacity hover:opacity-90">
               <Sparkle className="size-4" />
               اطلب اجتماعًا الآن
             </Button>

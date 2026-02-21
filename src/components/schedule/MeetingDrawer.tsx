@@ -1,4 +1,4 @@
-import { X, Clock, CalendarCheck, Video, Link2, ArrowLeft } from "lucide-react";
+import { X, Clock, CalendarCheck, Video, Link2, Sparkle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import type {
@@ -173,10 +173,10 @@ function MeetingDrawer({ meeting, open, onClose }: MeetingDrawerProps) {
 
         {/* ── Footer ── */}
         <div className="p-4">
-          <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-teal-dark py-3 text-sm font-medium text-white transition-opacity hover:opacity-90">
+          <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-l from-[#048F86] to-[#6DCDCD] py-3 text-sm font-medium text-white transition-opacity hover:opacity-90">
+          <Sparkle className="size-4" />
             تفاصيل الاجتماع
-            <ArrowLeft className="size-4" />
-          </button>
+            </button>
         </div>
       </div>
     </>
