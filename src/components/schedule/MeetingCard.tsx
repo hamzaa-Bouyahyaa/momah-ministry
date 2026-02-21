@@ -4,11 +4,15 @@ import { StatusBadge } from "./StatusBadge";
 
 interface MeetingCardProps {
   meeting: Meeting;
+  onClick?: () => void;
 }
 
-function MeetingCard({ meeting }: MeetingCardProps) {
+function MeetingCard({ meeting, onClick }: MeetingCardProps) {
   return (
-    <div className="rounded-xl border border-border bg-card p-5">
+    <div
+      onClick={onClick}
+      className="cursor-pointer rounded-xl border border-border bg-card p-5 transition-shadow hover:shadow-md"
+    >
       <div className="mb-4 flex items-start">
         <StatusBadge status={meeting.status} />
       </div>

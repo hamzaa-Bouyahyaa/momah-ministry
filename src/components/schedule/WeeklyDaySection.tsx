@@ -7,6 +7,7 @@ interface WeeklyDaySectionProps {
   arabicMonthName: string;
   year: number;
   meetings: Meeting[];
+  onMeetingClick?: (meetingId: string) => void;
 }
 
 function WeeklyDaySection({
@@ -15,6 +16,7 @@ function WeeklyDaySection({
   arabicMonthName,
   year,
   meetings,
+  onMeetingClick,
 }: WeeklyDaySectionProps) {
   if (meetings.length === 0) return null;
 
@@ -29,7 +31,11 @@ function WeeklyDaySection({
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {meetings.map((meeting) => (
-          <MeetingCard key={meeting.id} meeting={meeting} />
+          <MeetingCard
+            key={meeting.id}
+            meeting={meeting}
+            onClick={() => onMeetingClick?.(meeting.id)}
+          />
         ))}
       </div>
     </div>

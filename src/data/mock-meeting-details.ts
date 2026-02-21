@@ -56,6 +56,7 @@ export const MOCK_DETAILED_MEETINGS: DetailedMeeting[] = [
     title: "رعاية توقيع مذكرة تفاهم بين وزارة البلديات والإسكان وصندوق البنية التحتية وشركة سدكو المالية",
     category: "external",
     tags: ["councils", "video-call", "has-content"],
+    goal: "مذكرة تفاهم لدعم تطوير وتعزيز واستثمار الحدائق العامة بالمملكة",
     time: "12:30",
     duration: "xx دقيقة",
     attendees: [

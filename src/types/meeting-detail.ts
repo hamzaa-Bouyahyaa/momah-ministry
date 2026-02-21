@@ -31,6 +31,7 @@ export interface DetailedMeeting {
   location?: string;
   category: MeetingCategory;
   tags: MeetingTag[];
+  goal?: string;
   time: string;
   duration: string;
   attendees: Attendee[];
