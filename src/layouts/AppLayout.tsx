@@ -3,6 +3,7 @@ import { useAppStore } from "@/stores/app-store";
 import { SchedulePage } from "@/pages/schedule";
 import { RequestsPage } from "@/pages/requests";
 import { DelegationModal } from "@/components/delegation/DelegationModal";
+import { SearchModal } from "@/components/search/SearchModal";
 
 function AppLayout() {
   const activeHeaderTab = useAppStore((s) => s.activeHeaderTab);
@@ -22,6 +23,7 @@ function AppLayout() {
         )}
       </main>
       <DelegationModal />
+      <SearchModal />
     </div>
   );
 }
