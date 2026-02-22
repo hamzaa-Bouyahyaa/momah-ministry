@@ -4,6 +4,7 @@ import { Calendar } from "@/components/calendar/Calendar";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MeetingRequestCard } from "@/components/requests/MeetingRequestCard";
+import { DetailedMeetingCard } from "@/components/meetings/DetailedMeetingCard";
 import {
   MOCK_PENDING_REQUESTS,
   MOCK_SCHEDULED_REQUESTS,
@@ -26,9 +27,6 @@ function RequestsPage() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [calendarOpen]);
-
-  const requests =
-    activeTab === "pending" ? MOCK_PENDING_REQUESTS : MOCK_SCHEDULED_REQUESTS;
 
   return (
     <div className="mx-auto max-w-[1400px]">
@@ -86,10 +84,14 @@ function RequestsPage() {
         </div>
 
         {/* Cards grid */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {requests.map((request) => (
-            <MeetingRequestCard key={request.id} request={request} />
-          ))}
+        <div className="max-h-[calc(100vh-220px)] overflow-y-auto scrollbar-hide grid grid-cols-1 gap-4 md:grid-cols-2">
+          {activeTab === "pending"
+            ? MOCK_PENDING_REQUESTS.map((request) => (
+                <MeetingRequestCard key={request.id} request={request} />
+              ))
+            : MOCK_SCHEDULED_REQUESTS.map((meeting) => (
+                <DetailedMeetingCard key={meeting.id} meeting={meeting} />
+              ))}
         </div>
       </div>
     </div>
