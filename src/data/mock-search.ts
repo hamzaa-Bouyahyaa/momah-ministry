@@ -2,6 +2,7 @@ import type {
   SearchOption,
   RecentSearch,
   MeetingClassification,
+  SearchResult,
 } from "@/types/search";
 
 export const MOCK_SEARCH_OPTIONS: SearchOption[] = [
@@ -98,5 +99,15 @@ export const MOCK_CLASSIFICATIONS: MeetingClassification[] = [
   { id: "c-7", label: "تشغيلي", type: "operational" },
   { id: "c-8", label: "استراتيجي", type: "strategic" },
   { id: "c-9", label: "سياسي", type: "political" },
+];
+
+export const MOCK_SEARCH_RESULTS: SearchResult[] = [
+  { id: "sr-1", title: "اجتماع مع قيادات الوزارة", category: "قسم الاجتماعات" },
+  { id: "sr-2", title: "مراجعة مبادرات التحول الرقمي", category: "قسم الاجتماعات" },
+  { id: "sr-3", title: "لقاء تنسيقي مع الجهات الحكومية", category: "قسم الاجتماعات" },
+  { id: "sr-4", title: "اجتماع مع قيادات الوزارة", category: "قسم الاجتماعات" },
+  { id: "sr-5", title: "مراجعة مبادرات التحول الرقمي", category: "قسم الاجتماعات" },
+  { id: "sr-6", title: "لقاء تنسيقي مع الجهات الحكومية", category: "قسم الاجتماعات" },
+  { id: "sr-7", title: "لقاء تنسيقي مع الجهات الحكومية", category: "قسم الاجتماعات" },
 ];
 

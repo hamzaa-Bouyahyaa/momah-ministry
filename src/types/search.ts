@@ -27,3 +27,9 @@ export interface MeetingClassification {
   type: "political" | "strategic" | "operational";
 }
 
+export interface SearchResult {
+  id: string;
+  title: string;
+  category: string;
+}
+
