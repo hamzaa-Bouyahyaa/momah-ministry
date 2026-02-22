@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useModalStore } from "@/stores/modal-store";
 import { HeaderNavTabs } from "./HeaderNavTabs";
 import calendarIcon from "@/assets/icons/calendar-icon.svg";
@@ -38,9 +39,18 @@ function AppHeader() {
             >
               <img src={searchIcon} alt="بحث" className="size-4 md:size-5" />
             </button>
-            <button className="flex size-9 items-center justify-center rounded-full border border-border bg-muted transition-colors md:size-10">
-              <img src={aiIcon} alt="إعدادات" className="size-4 md:size-5" />
-            </button>
+            <Popover>
+              <PopoverTrigger asChild>
+                <button className="flex size-9 items-center justify-center rounded-full border border-border bg-muted transition-colors md:size-10">
+                  <img src={aiIcon} alt="إعدادات" className="size-4 md:size-5" />
+                </button>
+              </PopoverTrigger>
+              <PopoverContent align="end" sideOffset={8} className="w-auto p-1">
+                <button className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-foreground transition-colors hover:bg-muted">
+                  <span>تسجيل الخروج</span>
+                </button>
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
       </div>
