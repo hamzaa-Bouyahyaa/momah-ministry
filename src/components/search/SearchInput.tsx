@@ -26,7 +26,7 @@ function SearchInput({
 
   return (
     <div className="relative shrink-0">
-      <Search className="absolute start-4 top-1/2 size-5 -translate-y-1/2 text-white/40" />
+      <Search className="absolute start-3 top-1/2 size-4 -translate-y-1/2 text-white/40 sm:start-4 sm:size-5" />
       <input
         ref={inputRef}
         type="text"
@@ -35,7 +35,7 @@ function SearchInput({
         onFocus={onFocus}
         placeholder="يوفّر النظام أداة متقدمة للبحث في كافة بيانات وتفاصيل الاجتماعات..."
         className={cn(
-          "h-12 w-full rounded-xl border bg-white/5 ps-12 text-sm text-white placeholder:text-white/40 focus:outline-none",
+          "h-10 w-full rounded-xl border bg-white/5 ps-10 text-xs text-white placeholder:text-white/40 focus:outline-none sm:h-12 sm:ps-12 sm:text-sm",
           isActive
             ? "border-white/20 pe-11"
             : "border-white/10 pe-4",

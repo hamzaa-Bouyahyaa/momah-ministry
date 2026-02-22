@@ -40,11 +40,11 @@ function SearchModal() {
       <DialogContent
         showCloseButton={false}
         onOpenAutoFocus={(e) => e.preventDefault()}
-        className="dark flex max-h-[85vh] flex-col overflow-hidden border-white/10 bg-[#1a1a2e] sm:max-w-5xl"
+        className="dark flex max-h-[85vh] max-w-[calc(100%-2.5rem)] flex-col overflow-hidden border-white/10 bg-[#1a1a2e] p-4 sm:p-6 lg:max-w-5xl"
       >
         <DialogTitle className="sr-only">البحث في الاجتماعات</DialogTitle>
 
-        <div dir="rtl" className="flex min-h-0 flex-1 flex-col gap-6">
+        <div dir="rtl" className="flex min-h-0 flex-1 flex-col gap-4 sm:gap-6">
           <SearchInput
             value={query}
             isActive={isSearchActive}
@@ -55,17 +55,17 @@ function SearchModal() {
 
           {/* Default view */}
           <div
-            className={`min-h-0 flex-1 transition-all duration-300 ${
+            className={`scrollbar-hide min-h-0 flex-1 overflow-y-auto transition-all duration-300 lg:overflow-hidden ${
               isSearchActive
                 ? "pointer-events-none absolute opacity-0"
                 : "relative opacity-100"
             }`}
           >
-            <div className="grid h-full grid-cols-1 gap-6 lg:grid-cols-5">
-              <div className="scrollbar-hide min-h-0 overflow-y-auto lg:col-span-3">
+            <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-5">
+              <div className="scrollbar-hide min-h-0 lg:col-span-3 lg:overflow-y-auto">
                 <SearchOptions />
               </div>
-              <div className="space-y-6 lg:col-span-2">
+              <div className="space-y-4 sm:space-y-6 lg:col-span-2">
                 <RecentSearches />
                 <MeetingClassifications />
               </div>
