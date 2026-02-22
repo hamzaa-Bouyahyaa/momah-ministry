@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Calendar, Sparkle } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Calendar as CalendarIcon, Sparkle } from "lucide-react";
+import { Calendar } from "@/components/calendar/Calendar";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MeetingRequestCard } from "@/components/requests/MeetingRequestCard";
@@ -12,6 +13,19 @@ type RequestTab = "pending" | "scheduled";
 
 function RequestsPage() {
   const [activeTab, setActiveTab] = useState<RequestTab>("pending");
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const calendarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!calendarOpen) return;
+    function handleClickOutside(e: MouseEvent) {
+      if (calendarRef.current && !calendarRef.current.contains(e.target as Node)) {
+        setCalendarOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [calendarOpen]);
 
   const requests =
     activeTab === "pending" ? MOCK_PENDING_REQUESTS : MOCK_SCHEDULED_REQUESTS;
@@ -49,9 +63,20 @@ function RequestsPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <button className="flex size-9 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:bg-muted">
-              <Calendar className="size-4" />
-            </button>
+            <div className="relative" ref={calendarRef}>
+              <button
+                onClick={() => setCalendarOpen((prev) => !prev)}
+                className="flex size-9 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:bg-muted"
+              >
+                <CalendarIcon className="size-4" />
+              </button>
+
+              {calendarOpen && (
+                <div className="absolute left-0 top-full z-50 mt-2">
+                  <Calendar className="w-[320px]" />
+                </div>
+              )}
+            </div>
 
             <Button className="gap-2 rounded-full bg-gradient-to-l from-[#048F86] to-[#6DCDCD] py-3 text-sm font-medium text-white transition-opacity hover:opacity-90">
               <Sparkle className="size-4" />
