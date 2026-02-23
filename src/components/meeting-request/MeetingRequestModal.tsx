@@ -29,7 +29,7 @@ function MeetingRequestModal() {
               >
                 <TabsTrigger
                   value="voice"
-                  className="rounded-full px-5 py-2.5 text-sm font-medium ata-[state=active]:bg-linear-to-l data-[state=active]:from-[#048F86] data-[state=active]:to-[#6DCDCD] data-[state=active]:text-white data-[state=active]:shadow-none"
+                  className="rounded-full px-5 py-2.5 text-sm font-medium data-[state=active]:bg-linear-to-l data-[state=active]:from-[#048F86] data-[state=active]:to-[#6DCDCD] data-[state=active]:text-white data-[state=active]:shadow-none"
                 >
                   طلب اجتماع عبر الصوت
                 </TabsTrigger>
@@ -47,7 +47,7 @@ function MeetingRequestModal() {
             </TabsContent>
 
             <TabsContent value="written">
-              <WrittenRequestTab />
+              <WrittenRequestTab onClose={closeModal} />
             </TabsContent>
           </Tabs>
         </div>
