@@ -116,7 +116,9 @@ function useAudioRecorder() {
       mediaRecorderRef.current!.stop();
     }
     streamRef.current?.getTracks().forEach((track) => track.stop());
-    audioContextRef.current?.close();
+    if (audioContextRef.current?.state !== "closed") {
+      audioContextRef.current?.close();
+    }
     setAnalyser(null);
     setState("recorded");
   }, []);
@@ -165,7 +167,9 @@ function useAudioRecorder() {
       mediaRecorderRef.current!.stop();
     }
     streamRef.current?.getTracks().forEach((track) => track.stop());
-    audioContextRef.current?.close();
+    if (audioContextRef.current?.state !== "closed") {
+      audioContextRef.current?.close();
+    }
     if (audioElementRef.current) {
       audioElementRef.current.pause();
       audioElementRef.current = null;
