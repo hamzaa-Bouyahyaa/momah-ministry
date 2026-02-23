@@ -3,6 +3,7 @@ import { create } from "zustand";
 interface ModalDataMap {
   delegation: { meetingId: string };
   search: Record<string, never>;
+  "meeting-request": Record<string, never>;
 }
 
 type ModalName = keyof ModalDataMap;

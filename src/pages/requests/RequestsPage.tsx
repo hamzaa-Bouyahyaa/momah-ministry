@@ -6,6 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MeetingRequestCard } from "@/components/requests/MeetingRequestCard";
 import { DetailedMeetingCard } from "@/components/meetings/DetailedMeetingCard";
+import { useModalStore } from "@/stores/modal-store";
 import {
   MOCK_PENDING_REQUESTS,
   MOCK_SCHEDULED_REQUESTS,
@@ -15,6 +16,7 @@ type RequestTab = "pending" | "scheduled";
 
 function RequestsPage() {
   const [activeTab, setActiveTab] = useState<RequestTab>("pending");
+  const openModal = useModalStore((s) => s.openModal);
 
   return (
     <div className="mx-auto max-w-[1400px]">
@@ -60,7 +62,10 @@ function RequestsPage() {
               </PopoverContent>
             </Popover>
 
-            <Button className="gap-2 rounded-full bg-gradient-to-l from-[#048F86] to-[#6DCDCD] py-3 text-sm font-medium text-white transition-opacity hover:opacity-90">
+            <Button
+              onClick={() => openModal("meeting-request", {})}
+              className="gap-2 rounded-full bg-gradient-to-l from-[#048F86] to-[#6DCDCD] py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
+            >
               <Sparkle className="size-4" />
               اطلب اجتماعًا الآن
             </Button>
