@@ -10,6 +10,7 @@ interface VoiceRequestTabProps {
 const STATUS_TEXT: Record<string, string> = {
   idle: "اضغط على زر التسجيل للبدء",
   recording: "أنا مُنصتٌ لمعاليكم.",
+  paused: "التسجيل متوقف مؤقتًا",
   recorded: "تم التسجيل. يمكنك الإرسال الآن.",
 };
 
@@ -22,6 +23,8 @@ function VoiceRequestTab({ onClose }: VoiceRequestTabProps) {
     isPlaying,
     playbackProgress,
     startRecording,
+    pauseRecording,
+    resumeRecording,
     stopRecording,
     playRecording,
     pausePlayback,
@@ -42,7 +45,7 @@ function VoiceRequestTab({ onClose }: VoiceRequestTabProps) {
   return (
     <div className="flex flex-col items-center gap-6 py-8">
       {/* Animated orb */}
-      <AnimatedOrb isActive={isRecording} />
+      <AnimatedOrb isActive={isRecording || state === "paused"} />
 
       {/* Status text */}
       <p className="text-lg font-semibold text-foreground">
@@ -61,11 +64,14 @@ function VoiceRequestTab({ onClose }: VoiceRequestTabProps) {
           isPlaying={isPlaying}
           playbackProgress={playbackProgress}
           onStart={startRecording}
+          onPauseRecording={pauseRecording}
+          onResumeRecording={resumeRecording}
           onStop={stopRecording}
           onSend={handleSend}
           onCancel={handleCancel}
           onPlay={playRecording}
-          onPause={pausePlayback}
+          onPausePlayback={pausePlayback}
+          onReset={resetRecording}
         />
       </div>
     </div>

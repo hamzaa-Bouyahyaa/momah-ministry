@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 
-type RecordingState = "idle" | "recording" | "recorded";
+type RecordingState = "idle" | "recording" | "paused" | "recorded";
 
 function useAudioRecorder() {
   const [state, setState] = useState<RecordingState>("idle");
@@ -96,9 +96,24 @@ function useAudioRecorder() {
     }
   }, []);
 
-  const stopRecording = useCallback(() => {
+  const pauseRecording = useCallback(() => {
     if (mediaRecorderRef.current?.state === "recording") {
-      mediaRecorderRef.current.stop();
+      mediaRecorderRef.current.pause();
+      setState("paused");
+    }
+  }, []);
+
+  const resumeRecording = useCallback(() => {
+    if (mediaRecorderRef.current?.state === "paused") {
+      mediaRecorderRef.current.resume();
+      setState("recording");
+    }
+  }, []);
+
+  const stopRecording = useCallback(() => {
+    const recorderState = mediaRecorderRef.current?.state;
+    if (recorderState === "recording" || recorderState === "paused") {
+      mediaRecorderRef.current!.stop();
     }
     streamRef.current?.getTracks().forEach((track) => track.stop());
     audioContextRef.current?.close();
@@ -145,8 +160,9 @@ function useAudioRecorder() {
   }, []);
 
   const resetRecording = useCallback(() => {
-    if (mediaRecorderRef.current?.state === "recording") {
-      mediaRecorderRef.current.stop();
+    const recorderState = mediaRecorderRef.current?.state;
+    if (recorderState === "recording" || recorderState === "paused") {
+      mediaRecorderRef.current!.stop();
     }
     streamRef.current?.getTracks().forEach((track) => track.stop());
     audioContextRef.current?.close();
@@ -177,6 +193,8 @@ function useAudioRecorder() {
     isPlaying,
     playbackProgress,
     startRecording,
+    pauseRecording,
+    resumeRecording,
     stopRecording,
     playRecording,
     pausePlayback,

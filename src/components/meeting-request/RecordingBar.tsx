@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { Pause, Send, Mic, Play } from "lucide-react";
+import { Pause, Send, Mic, Play, Square, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RecordedWaveform } from "./RecordedWaveform";
 import type { RecordingState } from "@/hooks/useAudioRecorder";
@@ -11,11 +11,14 @@ interface RecordingBarProps {
   isPlaying: boolean;
   playbackProgress: number;
   onStart: () => void;
+  onPauseRecording: () => void;
+  onResumeRecording: () => void;
   onStop: () => void;
   onSend: () => void;
   onCancel: () => void;
   onPlay: () => void;
-  onPause: () => void;
+  onPausePlayback: () => void;
+  onReset: () => void;
 }
 
 function LiveWaveformCanvas({ analyser }: { analyser: AnalyserNode | null }) {
@@ -101,11 +104,14 @@ function RecordingBar({
   isPlaying,
   playbackProgress,
   onStart,
+  onPauseRecording,
+  onResumeRecording,
   onStop,
   onSend,
   onCancel,
   onPlay,
-  onPause,
+  onPausePlayback,
+  onReset,
 }: RecordingBarProps) {
   return (
     <div className="flex flex-col items-center gap-3">
@@ -123,7 +129,7 @@ function RecordingBar({
 
         {/* Waveform visualization */}
         <div className="min-w-0 flex-1 overflow-hidden">
-          {state === "recording" && analyser ? (
+          {(state === "recording" || state === "paused") && analyser ? (
             <LiveWaveformCanvas analyser={analyser} />
           ) : state === "recorded" && waveformData.length > 0 ? (
             <RecordedWaveform
@@ -135,7 +141,7 @@ function RecordingBar({
           )}
         </div>
 
-        {/* Right-side action button */}
+        {/* Action buttons */}
         {state === "idle" && (
           <Button
             size="icon"
@@ -146,29 +152,72 @@ function RecordingBar({
             <Mic className="size-5 text-primary" />
           </Button>
         )}
+
         {state === "recording" && (
-          <Button
-            size="icon"
-            variant="ghost"
-            className="size-10 shrink-0 rounded-full"
-            onClick={onStop}
-          >
-            <Pause className="size-5 text-primary" />
-          </Button>
+          <div className="flex shrink-0 items-center gap-1">
+            <Button
+              size="icon"
+              variant="ghost"
+              className="size-9 rounded-full"
+              onClick={onPauseRecording}
+            >
+              <Pause className="size-4 text-primary" />
+            </Button>
+            <Button
+              size="icon"
+              variant="ghost"
+              className="size-9 rounded-full"
+              onClick={onStop}
+            >
+              <Square className="size-4 fill-red-500 text-red-500" />
+            </Button>
+          </div>
         )}
+
+        {state === "paused" && (
+          <div className="flex shrink-0 items-center gap-1">
+            <Button
+              size="icon"
+              variant="ghost"
+              className="size-9 rounded-full"
+              onClick={onResumeRecording}
+            >
+              <Play className="size-4 text-primary" />
+            </Button>
+            <Button
+              size="icon"
+              variant="ghost"
+              className="size-9 rounded-full"
+              onClick={onStop}
+            >
+              <Square className="size-4 fill-red-500 text-red-500" />
+            </Button>
+          </div>
+        )}
+
         {state === "recorded" && (
-          <Button
-            size="icon"
-            variant="ghost"
-            className="size-10 shrink-0 rounded-full"
-            onClick={isPlaying ? onPause : onPlay}
-          >
-            {isPlaying ? (
-              <Pause className="size-5 text-primary" />
-            ) : (
-              <Play className="size-5 text-primary" />
-            )}
-          </Button>
+          <div className="flex shrink-0 items-center gap-1">
+            <Button
+              size="icon"
+              variant="ghost"
+              className="size-9 rounded-full"
+              onClick={isPlaying ? onPausePlayback : onPlay}
+            >
+              {isPlaying ? (
+                <Pause className="size-4 text-primary" />
+              ) : (
+                <Play className="size-4 text-primary" />
+              )}
+            </Button>
+            <Button
+              size="icon"
+              variant="ghost"
+              className="size-9 rounded-full"
+              onClick={onReset}
+            >
+              <RotateCcw className="size-4 text-muted-foreground" />
+            </Button>
+          </div>
         )}
       </div>
 
