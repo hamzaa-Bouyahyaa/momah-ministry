@@ -1,15 +1,6 @@
 import { useModalStore } from "@/stores/modal-store";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { VoiceRequestTab } from "./VoiceRequestTab";
 import { WrittenRequestTab } from "./WrittenRequestTab";
 
@@ -38,13 +29,13 @@ function MeetingRequestModal() {
               >
                 <TabsTrigger
                   value="voice"
-                  className="rounded-full px-5 py-2.5 text-sm font-medium data-[state=active]:bg-gradient-to-l data-[state=active]:from-[#048F86] data-[state=active]:to-[#6DCDCD] data-[state=active]:text-white data-[state=active]:shadow-none"
+                  className="rounded-full px-5 py-2.5 text-sm font-medium ata-[state=active]:bg-linear-to-l data-[state=active]:from-[#048F86] data-[state=active]:to-[#6DCDCD] data-[state=active]:text-white data-[state=active]:shadow-none"
                 >
                   طلب اجتماع عبر الصوت
                 </TabsTrigger>
                 <TabsTrigger
                   value="written"
-                  className="rounded-full px-5 py-2.5 text-sm font-medium data-[state=active]:bg-gradient-to-l data-[state=active]:from-[#048F86] data-[state=active]:to-[#6DCDCD] data-[state=active]:text-white data-[state=active]:shadow-none"
+                  className="rounded-full px-5 py-2.5 text-sm font-medium data-[state=active]:bg-linear-to-l data-[state=active]:from-[#048F86] data-[state=active]:to-[#6DCDCD] data-[state=active]:text-white data-[state=active]:shadow-none"
                 >
                   طلب اجتماع كتابي
                 </TabsTrigger>
